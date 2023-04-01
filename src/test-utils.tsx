@@ -6,7 +6,8 @@ import { RootState } from "./app/store";
 import quoteReducer from "./features/quote/quoteSlice";
 import newsReducer from "./features/news/newsSlices";
 
-//1.1 Creamos un customRender agregando el Provider y el store
+//1.1 Creamos un customRender agregando el Provider y el store para 
+//envolver el componente que queremos testear.
 
 const customRender = (
   ui: React.ReactElement,
