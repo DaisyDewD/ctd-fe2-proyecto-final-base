@@ -13,8 +13,8 @@ const customRender = (
     preloadedState,
     store = configureStore({
       reducer: {
-        /* quote: quoteReducer,
-        news: newsReducer, */
+        //quote: quoteReducer,
+        //news: newsReducer,
       },
       preloadedState,
     }),
