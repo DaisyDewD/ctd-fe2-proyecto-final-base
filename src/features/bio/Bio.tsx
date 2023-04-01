@@ -1,48 +1,44 @@
 import { useState } from "react";
 import { NombresSimpsons, INFO_SIMPSONS } from "./constants";
-import styles from "./styles.module.css";
+import {
+  BioDescription,
+  BioImage,
+  BioName,
+  ButtonBio,
+  ContainerBio,
+  ContainerButtones,
+} from "./styles";
 
 const Bio = () => {
   const [bioActiva, setBioActiva] = useState(
     INFO_SIMPSONS[NombresSimpsons.BART]
   );
 
-  const onClick: (nombre: NombresSimpsons) => void = (nombre) =>
-    setBioActiva(INFO_SIMPSONS[nombre]);
+  const onClick: (name: NombresSimpsons) => void = (name) =>
+    setBioActiva(INFO_SIMPSONS[name]);
 
-  const crearBotones = () => {
-    return Object.keys(INFO_SIMPSONS).map((nombre: string) => (
-      <button
-        key={nombre as string}
-        onClick={() => onClick(nombre as NombresSimpsons)}
-        className={
-          bioActiva.id === nombre
-            ? styles.botonBioActivo
-            : styles.botonBioInactivo
-        }
+  const crearButtones = () => {
+    return Object.keys(INFO_SIMPSONS).map((name: string) => (
+      <ButtonBio
+        aria-label={name}
+        isActive={(bioActiva.id === name) as boolean}
+        key={name as string}
+        onClick={() => onClick(name as NombresSimpsons)}
       >
-        {nombre}
-      </button>
+        {name}
+      </ButtonBio>
     ));
   };
 
   return (
-    <div className={styles.bioContainer}>
-      <div className={styles.contenedorBotones}>{crearBotones()}</div>
+    <ContainerBio>
+      <ContainerButtones>{crearButtones()}</ContainerButtones>
+      <BioImage src={bioActiva.image} alt={bioActiva.name} />
       <div>
-        <div>
-          <img
-            src={bioActiva.image}
-            alt={bioActiva.nombre}
-            className={styles.bioImagen}
-          />
-        </div>
-        <div>
-          <h3 className={styles.bioNombre}>{bioActiva.nombre}</h3>
-          <p className={styles.bioDescripcion}>{bioActiva.descripcion}</p>
-        </div>
+        <BioName>{bioActiva.name}</BioName>
+        <BioDescription>{bioActiva.description}</BioDescription>
       </div>
-    </div>
+    </ContainerBio>
   );
 };
 
