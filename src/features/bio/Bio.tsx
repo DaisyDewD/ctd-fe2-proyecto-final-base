@@ -1,13 +1,7 @@
 import { useState } from "react";
 import { SimpsonsNames, INFO_SIMPSONS } from "./constants";
-import {
-  BioDescription,
-  BioImage,
-  BioName,
-  BioButton,
-  BioContainer,
-  ContainerButtons,
-} from "./styles"; //Estilos dinámicos
+import { BioDescription, BioImage, BioName, BioButton, BioContainer, ContainerButtons } from "./styles"; //Estilos dinámicos
+
 
 const Bio = () => {
   const [bioActive, setBioActive] = useState(
