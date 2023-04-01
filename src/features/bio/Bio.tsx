@@ -1,44 +1,44 @@
 import { useState } from "react";
-import { NombresSimpsons, INFO_SIMPSONS } from "./constants";
+import { SimpsonsNames, INFO_SIMPSONS } from "./constants";
 import {
   BioDescription,
   BioImage,
   BioName,
-  ButtonBio,
-  ContainerBio,
-  ContainerButtones,
-} from "./styles";
+  BioButton,
+  BioContainer,
+  ContainerButtons,
+} from "./styles"; //Estilos dinámicos
 
 const Bio = () => {
-  const [bioActiva, setBioActiva] = useState(
-    INFO_SIMPSONS[NombresSimpsons.BART]
+  const [bioActive, setBioActive] = useState(
+    INFO_SIMPSONS[SimpsonsNames.BART]
   );
 
-  const onClick: (name: NombresSimpsons) => void = (name) =>
-    setBioActiva(INFO_SIMPSONS[name]);
+  const onClick: (name: SimpsonsNames) => void = (name) =>
+    setBioActive(INFO_SIMPSONS[name]);
 
-  const crearButtones = () => {
+  const createButtons = () => {
     return Object.keys(INFO_SIMPSONS).map((name: string) => (
-      <ButtonBio
+      <BioButton
         aria-label={name}
-        isActive={(bioActiva.id === name) as boolean}
+        isActive={(bioActive.id === name) as boolean}
         key={name as string}
-        onClick={() => onClick(name as NombresSimpsons)}
+        onClick={() => onClick(name as SimpsonsNames)}
       >
         {name}
-      </ButtonBio>
+      </BioButton>
     ));
   };
 
   return (
-    <ContainerBio>
-      <ContainerButtones>{crearButtones()}</ContainerButtones>
-      <BioImage src={bioActiva.image} alt={bioActiva.name} />
+    <BioContainer>
+      <ContainerButtons>{createButtons()}</ContainerButtons>
+      <BioImage src={bioActive.image} alt={bioActive.name} />
       <div>
-        <BioName>{bioActiva.name}</BioName>
-        <BioDescription>{bioActiva.description}</BioDescription>
+        <BioName>{bioActive.name}</BioName>
+        <BioDescription>{bioActive.description}</BioDescription>
       </div>
-    </ContainerBio>
+    </BioContainer>
   );
 };
 

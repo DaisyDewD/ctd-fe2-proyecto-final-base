@@ -1,6 +1,8 @@
 import styled, { css } from "styled-components";
 
-export const ContainerBio = styled.div`
+//agregar estilos dinámicos a los botones
+
+export const BioContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -26,7 +28,7 @@ export const BioDescription = styled.p`
   margin: 1rem auto;
 `;
 
-export const ContainerButtones = styled.div`
+export const ContainerButtons = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -35,7 +37,7 @@ export const ContainerButtones = styled.div`
   margin-bottom: 1rem;
 `;
 
-export const ButtonBio = styled.button<{ isActive?: boolean }>`
+export const BioButton = styled.button<{ isActive?: boolean }>`
   border-radius: 5px;
   border: 1px solid darkgray;
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
