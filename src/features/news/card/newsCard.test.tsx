@@ -11,14 +11,11 @@ const data = [
   {
     id: 1,
     title: "Los Simpson 'predijeron' escasez de combustible",
-    description:
-      "La más reciente es una teoría de que un episodio de 2010 del programa...",
-    image:
-      "https://i2-prod.mirror.co.uk/incoming/article25142408.ece/ALTERNATES/s615b/0_SIMPSONSJPG.jpg",
+    description: "La más reciente es una teoría de que un episodio de 2010 del programa...",
+    image: "https://i2-prod.mirror.co.uk/incoming/article25142408.ece/ALTERNATES/s615b/0_SIMPSONSJPG.jpg",
     date: simulateElapsedTime(300000),
     isPremium: false,
-    source:
-      "https://www.mirror.co.uk/tv/tv-news/simpsons-fans-convinced-show-predicted-25140770",
+    source: "https://www.mirror.co.uk/tv/tv-news/simpsons-fans-convinced-show-predicted-25140770",
   },
 ];
 describe("News component", () => {
