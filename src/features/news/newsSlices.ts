@@ -3,7 +3,7 @@ import { AppDispatch } from "../../app/store";
 import { getNewsListAPI } from "./newsAPI";
 import { INews } from "./types";
 
-export interface NewsState {
+interface NewsState {
   newsList: INews[] | null;
   premiumIdList: number[];
 }
@@ -22,24 +22,21 @@ const newsSlice = createSlice({
   name: "news",
   initialState,
   reducers: {
-    addPremiumSubscription: (state, action: PayloadAction<number>) => {
-      state.premiumIdList = [...state.premiumIdList, action.payload];
-    },
-    cleanPremiumList: (state) => {
-      state.premiumIdList = initialState.premiumIdList;
-    },
+    addPremiumSubscription: (state, action: PayloadAction<number>) => ({
+      ...state,
+      premiumIdList: [...state.premiumIdList, action.payload],
+    }),
+    cleanPremiumList: (state) => ({
+      ...state,
+      premiumIdList: initialState.premiumIdList,
+    }),
   },
   extraReducers: (builder) => {
     builder.addCase(getNewsListAsync.fulfilled, (state, action) => {
-      const list = () => {
-        const array: number[] = []; /*ver*/
-        action.payload.forEach((news) => {
-          news.isPremium && array.push(news.id);
-        });
-        return array;
-      };
-      state.newsList = action.payload;
-      state.premiumIdList = list();
+      const premiumIdList = action.payload
+        .filter((news) => news.isPremium)
+        .map((news) => news.id);
+      return { ...state, newsList: action.payload, premiumIdList };
     });
   },
 });

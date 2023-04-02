@@ -25,9 +25,9 @@ describe("Quote component", () => {
     test("should click the random quote button and fetch the data", async () => {
       render(<Quote />);
       await userEvent.click(screen.getByLabelText("Obtener cita aleatoria"));
-      expect((await screen.findAllByText("LOADING...")).length).toBeGreaterThan(
-        0
-      );
+      //expect((await screen.findAllByText("LOADING...")).length).toBeGreaterThan(
+        expect(screen.getByText('LOADING...')).toBeInTheDocument();
+        ;
     });
 
     test("should render a random quote", async () => {
