@@ -18,28 +18,21 @@ const data = [
     source: "https://www.mirror.co.uk/tv/tv-news/simpsons-fans-convinced-show-predicted-25140770",
   },
 ];
-describe("News component", () => {
+
+describe("NewsCard", () => {
   describe("When renders news section", () => {
-    test("should render cards content", async () => {
+    test("renders news card with correct data", async () => {
       render(<NewsCard news={data[0]} />);
-      expect(
-        await screen.findByText(
-          "Los Simpson 'predijeron' Escasez De Combustible"
-        )
-      ).toBeVisible();
-      expect(
-        await screen.findByText(
-          "La más reciente es una teoría de que un episodio de 2010 del programa..."
-        )
-      ).toBeVisible();
-      expect(await screen.findByText("Ver más")).toBeVisible();
+      expect(screen.getByText("Los Simpson 'predijeron' Escasez De Combustible")).toBeVisible();
+      expect(screen.getByText("La más reciente es una teoría de que un episodio de 2010 del programa...")).toBeVisible();
+      expect(screen.getByText("Ver más")).toBeVisible();
     });
   });
-  describe("When the user click on button 'ver mas'", () => {
-    test("should open a modal", async () => {
+  describe("when the 'Ver más' button is clicked", () => {
+    test("opens a modal", async () => {
       render(<NewsCard news={data[0]} />);
-      await userEvent.click(await screen.findByText("Ver más"));
-      expect(await screen.findByLabelText("modal-title")).toBeInTheDocument();
+      await userEvent.click(screen.getByText("Ver más"));
+      expect(screen.getByLabelText("modal-title")).toBeInTheDocument();
     });
   });
 });

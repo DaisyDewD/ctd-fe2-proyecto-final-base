@@ -1,10 +1,11 @@
 /** @jest-environment jsdom */
-import { screen } from "@testing-library/react";
+import { screen, waitFor, act } from "@testing-library/react";
 import { render } from "../../test-utils";
 import userEvent from "@testing-library/user-event";
 import "whatwg-fetch";
 import "@testing-library/jest-dom";
-import Bio from "./Bio";
+import Bio from "./Bio"; 
+
 
 describe("Bio component", () => {
   describe("when it mounts", () => {
@@ -12,29 +13,31 @@ describe("Bio component", () => {
       render(<Bio />);
     });
 
-    it("renders Bart Simpson's bio by default", async () => {
-      expect(await screen.findByAltText("Bart Simpson")).toBeVisible();
-      expect(await screen.findByText("Bart Simpson")).toBeVisible();
-      expect(await screen.findByText(
+    test("renders Bart Simpson's bio by default", async () => {
+      await waitFor(() => {
+        expect(screen.getByAltText("Bart Simpson")).toBeVisible();
+        expect(screen.getByText("Bart Simpson")).toBeVisible();
+        expect(screen.getByText(
           "A los diez años, Bart es el hijo mayor y único varón de Homero y Marge, y el hermano de Lisa y Maggie. Los rasgos de carácter más prominentes y populares de Bart son su picardía, rebeldía y falta de respeto a la autoridad."
-        )
-      ).toBeVisible();
+        )).toBeVisible();
+      });
     });
 
-    it("enables Homer's button", () => {
-      expect(screen.getByLabelText("HOMERO")).toBeEnabled();
+    test("enables Homer's button", () => {
+      expect(screen.getByRole("button", { name: "HOMERO" })).toBeEnabled();
     });
   });
 
   describe("when Homer's button is clicked", () => {
     beforeEach(async () => {
       render(<Bio />);
-      await userEvent.click(screen.getByLabelText("HOMERO"));
+      await act(async () => {
+        await userEvent.click(screen.getByRole("button", { name: "HOMERO" }));
+      });
     });
 
-    it("renders Homer Simpson's bio", async () => {
+    test("renders Homer Simpson's bio", async () => {
       expect(await screen.findByText("Homero Simpson")).toBeVisible();
     });
   });
 });
-

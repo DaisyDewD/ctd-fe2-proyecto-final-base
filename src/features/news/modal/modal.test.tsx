@@ -31,26 +31,22 @@ describe("Modal Component", () => {
   beforeEach(() => {
     store.dispatch(cleanPremiumList());
   });
-
   describe("When rendering a modal", () => {
     test("should render the close button", async () => {
-      render(<Modal news={data[0]} toggle={mockOnTogglePremium} />);
+      render(<Modal news={data[0]} toggle={jest.fn()} />);
       expect(await screen.findByAltText("close-button")).toBeVisible();
     });
-
     test("should render subscribe title when it's not premium", async () => {
-      render(<Modal news={data[0]} toggle={mockOnTogglePremium} />);
+      render(<Modal news={data[0]} toggle={jest.fn()} />);
       expect(
         await screen.findByText("Suscríbete a nuestro Newsletter")
       ).toBeVisible();
     });
-
     describe("When users wants to suscribe", () => {
       test("should render a subscribe button", async () => {
         render(<Modal news={data[0]} toggle={mockOnTogglePremium} />);
         expect(screen.getByLabelText("suscribe-button")).toBeInTheDocument();
       });
-
       test("should subscribe when the button is clicked", async () => {
         render(<Modal news={data[0]} toggle={mockOnTogglePremium} />);
 
@@ -68,7 +64,6 @@ describe("Modal Component", () => {
           ).toBeVisible();
         });
       });
-
       test("should render alert confirmation", async () => {
         render(<Modal news={data[0]} toggle={mockOnTogglePremium} />);
         expect(screen.getByLabelText("suscribe-button")).toBeInTheDocument();
@@ -80,7 +75,6 @@ describe("Modal Component", () => {
         });
       });
     });
-    
     describe("When users wants to close the modal", () => {
       test("should render a close modal button", async () => {
         render(<Modal news={data[0]} toggle={mockOnTogglePremium} />);

@@ -13,7 +13,7 @@ const initialState: NewsState = {
   premiumIdList: [],
 };
 
-export const getNewsListAsync = createAsyncThunk("getNews", async () => {
+export const getNewsListAsync = createAsyncThunk("news/newsgetNews", async () => {
   const newsList = await getNewsListAPI();
   return newsList;
 });
