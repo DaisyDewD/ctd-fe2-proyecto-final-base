@@ -41,6 +41,8 @@ const newsSlice = createSlice({
   },
 });
 
+
+
 export const getNewsList = () => (dispatch: AppDispatch) => {
   return dispatch(getNewsListAsync());
 };
@@ -48,3 +50,4 @@ export const getNewsList = () => (dispatch: AppDispatch) => {
 export const { addPremiumSubscription, cleanPremiumList } = newsSlice.actions;
 
 export default newsSlice.reducer;
+

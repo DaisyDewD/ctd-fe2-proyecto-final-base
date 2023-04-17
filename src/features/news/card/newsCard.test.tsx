@@ -33,6 +33,20 @@ describe("NewsCard", () => {
       render(<NewsCard news={data[0]} />);
       await userEvent.click(screen.getByText("Ver más"));
       expect(screen.getByLabelText("modal-title")).toBeInTheDocument();
+      expect(screen.getByText("Suscríbete")).toBeVisible();
     });
+
+    //Test added
+   /*  describe("when the 'Close' button is clicked", () => {
+      test("close the modal", async () => {
+        render(<NewsCard news={data[0]} />);
+        await userEvent.click(screen.getByText("Ver más"));
+        expect(screen.getByLabelText("modal-title")).toBeInTheDocument();
+        await userEvent.click(screen.getByLabelText("close-modal"));
+        expect(screen.getByLabelText("modal-title")).not.toBeInTheDocument();
+      }); */
   });
+
+
 });
+//});

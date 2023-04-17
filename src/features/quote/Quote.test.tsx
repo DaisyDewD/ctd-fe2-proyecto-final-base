@@ -1,5 +1,5 @@
 /** @jest-environment jsdom */
-import { fireEvent, screen } from "@testing-library/react";
+import { fireEvent, screen, waitForElementToBeRemoved } from "@testing-library/react";
 import { render } from "../../test-utils";
 import userEvent from "@testing-library/user-event";
 import { server } from "../../tests/mocks/server";
@@ -25,10 +25,20 @@ describe("Quote component", () => {
     test("should click the random quote button and fetch the data", async () => {
       render(<Quote />);
       await userEvent.click(screen.getByLabelText("Obtener cita aleatoria"));
-      //expect((await screen.findAllByText("LOADING...")).length).toBeGreaterThan(
         expect(screen.getByText('LOADING...')).toBeInTheDocument();
         ;
     });
+//test added
+test('When the request is resolved the loading text must disappear', async () => {
+  render(<Quote/>)
+  const input = screen.getByPlaceholderText("Ingresa el nombre del autor");
+  await userEvent.type(input, "Montgomery Burns");
+
+  const button = screen.getByText("Obtener Cita");
+  await userEvent.click(button);
+
+  await waitForElementToBeRemoved(() => screen.queryByText("LOADING..."))
+});
 
     test("should render a random quote", async () => {
       expect(

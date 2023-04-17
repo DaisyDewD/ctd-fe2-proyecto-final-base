@@ -13,7 +13,8 @@ import {
 } from "./styled";
 import { SubscribeImage, CloseButton as Close } from "../../../assets";
 
-//Aquí el modal recibe las props de la noticia y el toggle
+//Aquí el modal recibe las props de la noticia y el toggle 
+//además de la función que se encarga de cerrar el modal
 interface IProps {
   news: INews;
   toggle: () => void;
